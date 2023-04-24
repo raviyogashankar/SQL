@@ -31,6 +31,7 @@ ON A.actor_id = FA.actor_id
 WHERE A.first_name = 'Will' AND A.last_name='Wilson';
 -- WHERE CONCAT(A.first_name,' ',A.last_name) = 'Will Wilson';
 -- 5) Pull all the films that are rented and returned in the month of May 
+SELECT * FROM film;
 SELECT F.title, R.return_date FROM film F
 LEFT JOIN inventory I ON 
  F.film_id = I.film_id
