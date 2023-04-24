@@ -6,6 +6,7 @@ SELECT length(CONCAT(first_name,last_name)) Length_Full_Name, CONCAT(first_name,
 FROM actor LIMIT 10; 
 
 -- 2) List all the oscar awardees(Actors who received oscar award) with their full Names and the length of their names
+
 SELECT * FROM actor_award;
 SELECT CONCAT(first_name,last_name) FULL_NAME , LENGTH(CONCAT(first_name,last_name)) Len_Full_Name, awards 
 FROM actor_award
@@ -21,6 +22,7 @@ JOIN film F ON FA.film_id = F.film_id
 WHERE title = 'FROST Head';
 
 -- 4) Pull All the films acted by actor Will Wilson
+SELECT * FROM film;
 SELECT F.title, CONCAT(A.first_name,' ',A.last_name) Actor_Name  FROM film F 
 LEFT JOIN film_actor FA 
 ON FA.film_id = F.film_id
