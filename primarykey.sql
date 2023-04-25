@@ -62,3 +62,27 @@ address VARCHAR(40));
 ALTER TABLE test add PRIMARY KEY(test_id);
 ALTER TABLE test DROP PRIMARY KEY;
 ALTER TABLE test ADD CONSTRAINT test_prim PRIMARY KEY(test_id,email_id);
+
+CREATE TABLE parent (
+id INT NOT NULL ,
+PRIMARY KEY(id)
+);
+
+CREATE TABLE child(
+id INT,
+parent_id INT,
+FOREIGN KEY (parent_id) REFERENCES parent(id));
+
+INSERT INTO parent VALUES (1);
+SELECT * FROM parent;
+INSERT INTO child VALUES (1,1);
+SELECT * FROM child;
+INSERT INTO child VALUES (2,2);
+
+DROP TABLE child;
+
+CREATE TABLE child(
+id INT,
+parent_id INT,
+FOREIGN KEY (parent_id) REFERENCES parent(id) ON DELETE CASCADE );
+
