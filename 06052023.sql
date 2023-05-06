@@ -45,6 +45,13 @@ SELECT MAX(amount) FROM payment;
 SELECT MAX(amount) FROM payment;
 SELECT SUM(amount), MIN(amount), MAX(amount), MAX(amount) FROM payment;
 
+SELECT customer_id, SUM(amount) FROM payment
+WHERE customer_id IN (1,2,3,4,5,6,7,8,9)
+group by customer_id
+HAVING SUM(amount) > 100;
+
+
+
 
 
 
