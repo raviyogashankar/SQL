@@ -50,9 +50,46 @@ WHERE customer_id IN (1,2,3,4,5,6,7,8,9)
 group by customer_id
 HAVING SUM(amount) > 100;
 
+-- GROUP BY
+-- Task 1: Write a query to group the rental data by customer_id.
+SELECT customer_id, rental_date FROM rental
+GROUP BY customer_id;
 
+-- Task 2: Modify the above query to order the customers based on the number of rentals in descending order.
+SELECT customer_id, COUNT(rental_id) FROM rental
+GROUP BY customer_id
+ORDER BY COUNT(rental_id) DESC;
 
+-- Task 3: Write a query to count the number of payments made by each customer. 
+-- Show the customer id, the number of rentals and the total amount paid for each customer
+select customer_id, count(payment_id) as Count_payment, sum(amount) as total_payments from payment group by customer_id;
 
+-- Task 4: Modify the above query to include only those customers who have made at least 20 payments.
+select customer_id, count(payment_id) as Count_payment, sum(amount) as total_payments from payment group by customer_id
+having total_payments>= 20;
 
+SELECT YEAR(rental_date) AS rental_year, MONTH(rental_date) AS rental_month, COUNT(rental_id) AS total_rentals
+FROM rental
+GROUP BY rental_year, rental_month with rollup;
 
+-- Task 5: Write a query to find the number of films acted by each actor_id using film_actor table.
 
+SELECT actor_id, COUNT(film_id) No_of_Films FROM film_actor
+GROUP BY actor_id;
+
+-- Task 6: Write a query to find the total number of films acted by each actor grouped by the film rating.
+
+SELECT a.actor_id, CONCAT(a.first_name, ' ', a.last_name) AS Actor_Name, count(fi.film_id) AS count, fi.rating
+FROM actor a
+LEFT JOIN film_actor fa ON fa.actor_id = a.actor_id
+JOIN film fi ON fi.film_id = fa.film_id
+GROUP BY a.actor_id, fi.rating
+ORDER BY fi.rating desc ;
+
+-- Task 7: Using roll up, modify the above query to find the total count for each distinct actor i.e. find the total number of films each actor has acted along with the count of different ratings
+SELECT a.actor_id, CONCAT(a.first_name, ' ', a.last_name) AS Actor_Name, count(fi.film_id) AS count, fi.rating
+FROM actor a
+LEFT JOIN film_actor fa ON fa.actor_id = a.actor_id
+JOIN film fi ON fi.film_id = fa.film_id
+GROUP BY a.actor_id, fi.rating with rollup
+ORDER BY fi.rating desc ;
