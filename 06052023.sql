@@ -84,7 +84,7 @@ FROM actor a
 LEFT JOIN film_actor fa ON fa.actor_id = a.actor_id
 JOIN film fi ON fi.film_id = fa.film_id
 GROUP BY a.actor_id, fi.rating
-ORDER BY fi.rating desc ;
+ORDER BY a.actor_id ;
 
 -- Task 7: Using roll up, modify the above query to find the total count for each distinct actor i.e. find the total number of films each actor has acted along with the count of different ratings
 SELECT a.actor_id, CONCAT(a.first_name, ' ', a.last_name) AS Actor_Name, count(fi.film_id) AS count, fi.rating
@@ -92,4 +92,9 @@ FROM actor a
 LEFT JOIN film_actor fa ON fa.actor_id = a.actor_id
 JOIN film fi ON fi.film_id = fa.film_id
 GROUP BY a.actor_id, fi.rating with rollup
-ORDER BY fi.rating desc ;
+ORDER BY a.actor_id ;
+
+-- Write a query to group the rentals by year and count them.
+SELECT YEAR(rental_date) AS year_NO, MONTH(rental_date) as Month_no, count(rental_id)as total  FROM rental
+GROUP BY year_NO ;
+
