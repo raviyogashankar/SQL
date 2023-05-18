@@ -86,6 +86,8 @@ JOIN film fi ON fi.film_id = fa.film_id
 GROUP BY a.actor_id, fi.rating
 ORDER BY a.actor_id ;
 
+-- ORDER BY a.actor_id ;
+
 -- Task 7: Using roll up, modify the above query to find the total count for each distinct actor i.e. find the total number of films each actor has acted along with the count of different ratings
 SELECT a.actor_id, CONCAT(a.first_name, ' ', a.last_name) AS Actor_Name, count(fi.film_id) AS count, fi.rating
 FROM actor a
